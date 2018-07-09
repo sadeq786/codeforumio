@@ -20,12 +20,14 @@ if (process.env.NODE_ENV === "production") {
 
 // Get route that retrieves all the posts from Post collection in the Mongo database
 app.get("/api/posts", (req, res) => {
+  console.log("hit API get");
   db.Post.find({})
     .then(results => res.json(results))
     .catch(err => {
       console.log(err);
       res.status(422).json(err);
     });
+  
 });
 
 // Post route that adds a new post to the Post collection
@@ -45,6 +47,19 @@ app.post("/api/post", (req, res) => {
     });
 });
 
+// Get an individual post by id. not sure about this one. 
+app.get("/api/posts/:id", (req, res) => {
+  console.log("hit :id");
+  db.Post.findById(req.params.id)
+  .then(results => {
+    console.log("results for individual post: ", results);
+      res.json(results);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err);
+    });
+});
 
 // Send every request to the React app
 // Define any API routes before this runs
