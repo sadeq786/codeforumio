@@ -5,6 +5,7 @@
     background-repeat:   no-repeat;
     background-position: center center; 
     color: white;
+    
 }
 
 .btn {
@@ -14,6 +15,7 @@
 }
 
 h1 {
+    font-family: cursive;
     text-align: center;
     margin-top: 200px;
     font-weight: 900;
