@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const db = require("./models");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -15,6 +16,34 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// ROUTES
+
+// Get route that retrieves all the posts from Post collection in the Mongo database
+app.get("/api/posts", (req, res) => {
+  db.Post.find({})
+    .then(results => res.json(results))
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err);
+    });
+});
+
+// Post route that adds a new post to the Post collection
+app.post("/api/post", (req, res) => {
+  const newPost = {
+    postTitle: req.body.postTitle,
+    description: req.body.description,
+    stars: req.body.stars,
+    category: req.body.category,
+    comments: req.body.comments
+  };
+  db.Post.create(newPost)
+    .then(results => res.json(results))
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err);
+    });
+});
 
 
 // Send every request to the React app

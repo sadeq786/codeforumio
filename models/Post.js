@@ -6,6 +6,10 @@ const postSchema = new Schema ({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     stars: {
         type: Number,
         default: 0,
