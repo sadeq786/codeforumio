@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Post from "../components/Post"
 import "./All.css";
-import { Redirect } from 'react-router-dom';
-import IndividualPost from "../pages/IndividualPost";
-import { Link } from 'react-router-dom';
+// import IndividualPost from "../pages/IndividualPost";
 
 
 class All extends Component {
@@ -26,12 +24,17 @@ class All extends Component {
     handleClick = (id) => {
         console.log('clicked');
         console.log('id : ', id);
+        localStorage.setItem("postId", id);
+        console.log('this.props: ', this.props);
         //loadIndividualPost reroute
         API.getIndividualPost(id)
+            .then(results => { 
+                console.log("Here are my results: ", results.data._id);
+
+                this.props.history.push("/IndividualPost");
+    });
         console.log("about to redirect");
         // reroute to individual post page here
-        console.log('this.props: ', this.props);
-        this.props.history.push("/IndividualPost")
         
 
     }

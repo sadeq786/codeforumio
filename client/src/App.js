@@ -5,15 +5,18 @@ import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import All from "./pages/All";
+import IndividualPost from "./pages/IndividualPost";
 
 const App = () => (
   <Router>
     <div>
       <Navbar />
       <Route exact path="/" component={Homepage} />
-      <Route exact path="/All" render={props => <All {...props} />}
-/>      <Route exact path="/Login" component={Login} />
+      <Route exact path="/All" render={props => <All {...props} />}/>
+      <Route exact path="/Login" component={Login} />
       <Route exact path="/Signup" component={Signup} />
+      <Route exact path="/IndividualPost" render={props => <IndividualPost {...props} />}/>
+
       
     </div>
   </Router>
