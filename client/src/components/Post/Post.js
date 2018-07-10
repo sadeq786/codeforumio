@@ -17,7 +17,7 @@ const Post = props => (
                 {// posts
                 }
                 <div className="card" onClick={ () => props.handleClick(props.id)}> 
-                    {console.log("props: ", props)}
+                    {/* {console.log("props: ", props)} */}
                     <div className="card-header">
                         {props.postTitle}
                     </div>

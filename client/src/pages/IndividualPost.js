@@ -12,6 +12,9 @@ class IndividualPost extends Component {
     };
 
     handleInputChange = event => {
+        console.log("event.target.name: ", event.target.name);
+        console.log("event.target.value: ", event.target.value);
+
         // Getting the value and name of the input which triggered the change
         const { name, value } = event.target;
 
@@ -19,22 +22,33 @@ class IndividualPost extends Component {
         this.setState({
             [name]: value
         });
+        this.setState({ myComment: event.target.value });
+
+        console.log("state: ", this.state);
     };
 
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
 
+        this.setState({ myComment: event.target.value });
+        console.log("state: ", this.state);
         // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-        alert(`${this.state.myComment}`);
-        this.setState({ myComment: "" });
+        // alert(`${this.state.myComment}`);
+        // this.setState({ myComment: "" });
 
         // Save this comment to the collection of Comments. 
-        // API.submitComment(this.state.myComment)
-        //     .then(res => {
-        //         console.log("submitted comment");
-        //         this.setState({ myComment: "" });
-            // })
+        API.submitComment(this.state)
+            .then(res => {
+                console.log("submitted comment");
+            });
+
+        API.getComments()
+            .then(res => {
+                console.log("is this running? ");
+                this.setState({ comments: res.data });
+            })
+            .catch(err => console.log("hey this is the error: ", err));
     };
 
 
@@ -61,7 +75,7 @@ class IndividualPost extends Component {
     render() {
         return (
             <div>
-                {console.log("in individual post now")}
+                {/* {console.log("in individual post now")} */}
                 {/* {console.log(results)} */}
                 <Post
                     key={this.state.post._id}
@@ -95,10 +109,10 @@ class IndividualPost extends Component {
                         </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-1"></div>
-                    <div className="col-md-11">
-                    <h4>Browse Top Comments</h4>
-                    </div>
+                        <div className="col-md-1"></div>
+                        <div className="col-md-11">
+                            <h4>Browse Top Comments</h4>
+                        </div>
                     </div>
                     {
                         // load comments here.

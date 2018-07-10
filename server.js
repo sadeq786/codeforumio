@@ -74,8 +74,11 @@ app.get("/api/comments", (req, res) => {
 
 // Post route that adds a new comment to the Comment collection
 app.post("/api/postComment", (req, res) => {
+  console.log("=================req.body=====================", req.body);
+  console.log("=================req.body.myComment=====================", req.body.myComment);
+
   const newComment = {
-    text: req.body.text,   
+    text: req.body.myComment,   
   };
   db.Comment.create(newComment)
     .then(results => res.json(results))

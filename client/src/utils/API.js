@@ -25,7 +25,7 @@ export default {
         return axios.get("/api/comments");
     },
 
-    submitComment: function () {
-        return axios.post("/api/postComment", "newComment");
+    submitComment: function (text) {
+        return axios.post("/api/postComment", text);
     },
 }

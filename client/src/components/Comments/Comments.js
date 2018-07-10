@@ -17,7 +17,6 @@ const Comments = props => (
                 {// comments
                 }
                 <p>
-                    {console.log(props)}
                     {props.text}
                 </p>
                 {/* <p className="text-right">USER</p> */}
