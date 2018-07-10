@@ -9,9 +9,11 @@
 }
 
 .btn {
-    margin-top: 300px;
-    margin-left: 1200px;
+    margin-top: 200px;
+    margin-left : 610px;
+    /* margin-right: auto; */
     border-radius: 0;
+    text-align: center;
 }
 
 h1 {
