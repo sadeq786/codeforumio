@@ -1,16 +1,19 @@
 .jumbotron {
-    height: 750px;
+    height: 647px;
     background-image: url("../../images/IMG_426417.jpg");
     background-size: cover;                    
     background-repeat:   no-repeat;
     background-position: center center; 
     color: white;
+    border-radius: 0;
+    margin-bottom: 0;
+
     
 }
 
 .btn {
-    margin-top: 200px;
-    margin-left : 610px;
+    margin-top: 170px;
+    margin-left : 450px;
     /* margin-right: auto; */
     border-radius: 0;
     text-align: center;
