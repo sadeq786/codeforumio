@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Configure body parser
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
@@ -27,7 +27,7 @@ app.get("/api/posts", (req, res) => {
       console.log(err);
       res.status(422).json(err);
     });
-  
+
 });
 
 // Post route that adds a new post to the Post collection
@@ -51,8 +51,9 @@ app.post("/api/post", (req, res) => {
 app.get("/api/posts/:id", (req, res) => {
   console.log("hit :id");
   db.Post.findById(req.params.id)
-  .then(results => {
-    console.log("results for individual post: ", results);
+    .populate("Comment")
+    .then(results => {
+      console.log("results for individual post: ", results);
       res.json(results);
     })
     .catch(err => {
@@ -63,13 +64,13 @@ app.get("/api/posts/:id", (req, res) => {
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 // Connect to Mongoose production mongo database
 mongoose.connect(process.env.MONGODB_URL || "mongodb://prod:prod123@ds213199.mlab.com:13199/heroku_7f7chzrm");
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
