@@ -7,6 +7,10 @@ const commentSchema = new Schema ({
         type: String,
         required: true
     },
+    postId: {
+        type: Schema.Types.ObjectId,
+        // required: true
+    },
     // stars: {
     //     type: Number,
     //     default: 0,

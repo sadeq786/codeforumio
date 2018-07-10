@@ -1,5 +1,10 @@
-/* p {
-    margin-bottom: 30px;
+.row-space {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.text-right {
+    margin-top: 0;
 }
 
 span {
@@ -8,4 +13,4 @@ span {
 
 #stars {
     margin: 0 auto;
-} */
+}

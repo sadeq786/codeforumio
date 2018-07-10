@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import All from "./pages/All";
 import IndividualPost from "./pages/IndividualPost";
-import Jumbotron from "./components/Jumbotron";
+// import Jumbotron from "./components/Jumbotron";
 
 const App = () => (
   <Router>

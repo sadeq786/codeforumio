@@ -6,7 +6,8 @@ import Comment from "../components/Comments"
 class IndividualPost extends Component {
     state = {
         post: [],
-        myComment: ""
+        myComment: "",
+        comments: []
 
     };
 
@@ -26,11 +27,14 @@ class IndividualPost extends Component {
 
         // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
         alert(`${this.state.myComment}`);
-        this.setState({
-            myComment: ""
-        });
+        this.setState({ myComment: "" });
 
         // Save this comment to the collection of Comments. 
+        // API.submitComment(this.state.myComment)
+        //     .then(res => {
+        //         console.log("submitted comment");
+        //         this.setState({ myComment: "" });
+            // })
     };
 
 
@@ -42,7 +46,14 @@ class IndividualPost extends Component {
         API.getIndividualPost(id)
             .then(res => {
                 console.log("results of api call: ", res.data);
-                this.setState({ post: res.data })
+                this.setState({ post: res.data });
+            })
+            .catch(err => console.log("hey this is the error: ", err));
+
+        API.getComments()
+            .then(res => {
+                console.log("is this running? ");
+                this.setState({ comments: res.data });
             })
             .catch(err => console.log("hey this is the error: ", err));
     }
@@ -84,17 +95,24 @@ class IndividualPost extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-1"></div>
-                        <div className="col-md-11">
-                            {
-                                // load comments here.
-                                // map thru comments collection to display each comment in a paragraph
-                            }
-                                <Comment 
-                                
-                                />
-                        </div>
+                    <div className="col-md-1"></div>
+                    <div className="col-md-11">
+                    <h4>Browse Top Comments</h4>
                     </div>
+                    </div>
+                    {
+                        // load comments here.
+                        // map thru comments collection to display each comment in a paragraph
+                    }
+                    {this.state.comments.map(item => (
+                        <Comment
+                            key={item._id}
+                            id={item._id}
+                            text={item.text}
+                            createdAt={item.createdAt}
+
+                        />
+                    ))}
                 </div>
 
             </div>

@@ -4,7 +4,7 @@ import "./Post.css";
 
 const Post = props => (
     <div className="container">
-        <div className="row">
+        <div className="row row-space">
             <div className="col-md-1">
                 <div className="row text-center">
                     <span role="img">⭐</span>
@@ -17,7 +17,7 @@ const Post = props => (
                 {// posts
                 }
                 <div className="card" onClick={ () => props.handleClick(props.id)}> 
-                    {console.log(props)}
+                    {console.log("props: ", props)}
                     <div className="card-header">
                         {props.postTitle}
                     </div>

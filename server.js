@@ -27,7 +27,6 @@ app.get("/api/posts", (req, res) => {
       console.log(err);
       res.status(422).json(err);
     });
-
 });
 
 // Post route that adds a new post to the Post collection
@@ -51,11 +50,35 @@ app.post("/api/post", (req, res) => {
 app.get("/api/posts/:id", (req, res) => {
   console.log("hit :id");
   db.Post.findById(req.params.id)
-    .populate("Comment")
+    // .populate("Comment")
     .then(results => {
       console.log("results for individual post: ", results);
       res.json(results);
     })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err);
+    });
+});
+
+// Get route that retrieves all the comments from Comment collection in the Mongo database
+app.get("/api/comments", (req, res) => {
+  console.log("hit comments API");
+  db.Comment.find({})
+    .then(results => res.json(results))
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err);
+    });
+});
+
+// Post route that adds a new comment to the Comment collection
+app.post("/api/postComment", (req, res) => {
+  const newComment = {
+    text: req.body.text,   
+  };
+  db.Comment.create(newComment)
+    .then(results => res.json(results))
     .catch(err => {
       console.log(err);
       res.status(422).json(err);

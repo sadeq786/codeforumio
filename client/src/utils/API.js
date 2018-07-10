@@ -18,6 +18,14 @@ export default {
     // Get Individual Post
     getIndividualPost: function (id) {
         return axios.get("/api/posts/" + id)
-    }
+    },
 
+    // Get comments from the "/api/comments" route on the express server
+    getComments: function () {
+        return axios.get("/api/comments");
+    },
+
+    submitComment: function () {
+        return axios.post("/api/postComment", "newComment");
+    },
 }
