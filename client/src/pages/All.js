@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Post from "../components/Post"
 import "./All.css";
+import * as routes from "../constants/routes"
+// import { RefCountDisposable } from "rx";
 // import IndividualPost from "../pages/IndividualPost";
 
 
@@ -31,7 +33,8 @@ class All extends Component {
             .then(results => { 
                 console.log("Here are my results: ", results.data._id);
 
-                this.props.history.push("/IndividualPost");
+                // this.props.history.push("/IndividualPost");
+                this.props.history.push(routes.INDIVIDUALPOST);
     });
         console.log("about to redirect");
         // reroute to individual post page here

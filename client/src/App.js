@@ -6,7 +6,11 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import All from "./pages/All";
 import IndividualPost from "./pages/IndividualPost";
-// import Jumbotron from "./components/Jumbotron";
+import Account from "./pages/Account";
+import PasswordChange from "./pages/PasswordChange";
+import PasswordForget from "./pages/PasswordForget";
+import SignOut from "./pages/SignOut";
+
 
 const App = () => (
   <Router>
@@ -17,6 +21,10 @@ const App = () => (
       <Route exact path="/Login" component={Login} />
       <Route exact path="/Signup" component={Signup} />
       <Route exact path="/IndividualPost" render={props => <IndividualPost {...props} />}/>
+      <Route exact path="/Account" component={Account} />
+      <Route exact path="/PasswordChange" component={PasswordChange} />
+      <Route exact path="/PasswordForget" component={PasswordForget} />
+      <Route exact path="/SignOut" component={SignOut} />
 
       
     </div>

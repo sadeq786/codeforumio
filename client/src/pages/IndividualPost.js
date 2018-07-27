@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Post from "../components/Post";
 import API from "../utils/API";
-import Comment from "../components/Comments"
+import Comment from "../components/Comments";
+import * as routes from "../constants/routes";
+
 
 class IndividualPost extends Component {
     state = {
@@ -41,6 +43,8 @@ class IndividualPost extends Component {
         API.submitComment(this.state)
             .then(res => {
                 console.log("submitted comment");
+                window.location.reload();
+
             });
 
         API.getComments()

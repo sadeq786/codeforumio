@@ -50,7 +50,7 @@ app.post("/api/post", (req, res) => {
 app.get("/api/posts/:id", (req, res) => {
   console.log("hit :id");
   db.Post.findById(req.params.id)
-    // .populate("Comment")
+    .populate("comments")
     .then(results => {
       console.log("results for individual post: ", results);
       res.json(results);
