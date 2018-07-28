@@ -9,6 +9,8 @@ const commentSchema = new Schema ({
     },
     postId: {
         type: Schema.Types.ObjectId,
+        ref: "Post"
+        // default: req.params.id
         // required: true
     },
     // stars: {

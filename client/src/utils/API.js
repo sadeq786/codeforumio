@@ -21,10 +21,11 @@ export default {
     },
 
     // Get comments from the "/api/comments" route on the express server
-    getComments: function () {
-        return axios.get("/api/comments");
+    getComments: function (id) {
+        return axios.get("/api/comments/" + id);
     },
 
+    // Text is an object here
     submitComment: function (text) {
         return axios.post("/api/postComment", text);
     },

@@ -9,7 +9,8 @@ class IndividualPost extends Component {
     state = {
         post: [],
         myComment: "",
-        comments: []
+        comments: [],
+        uniqueId: ""
 
     };
 
@@ -58,6 +59,7 @@ class IndividualPost extends Component {
 
     componentDidMount() {
         const id = localStorage.getItem("postId");
+        this.setState({ uniqueId: id });
 
         // console.log("props: ", props);
         console.log("local storage get item: ", id);
@@ -68,7 +70,7 @@ class IndividualPost extends Component {
             })
             .catch(err => console.log("hey this is the error: ", err));
 
-        API.getComments()
+        API.getComments(id)
             .then(res => {
                 console.log("is this running? ");
                 this.setState({ comments: res.data });

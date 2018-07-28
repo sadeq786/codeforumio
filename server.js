@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const db = require("./models");
 const PORT = process.env.PORT || 3001;
 const app = express();
-
+const {ObjectId} = require('mongodb');
 // Configure body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -20,7 +20,8 @@ if (process.env.NODE_ENV === "production") {
 
 // Get route that retrieves all the posts from Post collection in the Mongo database
 app.get("/api/posts", (req, res) => {
-  console.log("hit API get");
+  console.log('=========================================================================');
+  console.log("LATEST POSTS: Get route that retrieves all the posts from Post collection");
   db.Post.find({})
     .then(results => res.json(results))
     .catch(err => {
@@ -30,6 +31,7 @@ app.get("/api/posts", (req, res) => {
 });
 
 // Post route that adds a new post to the Post collection
+// Not used yet. Will be used for adding new post. 
 app.post("/api/post", (req, res) => {
   const newPost = {
     postTitle: req.body.postTitle,
@@ -46,13 +48,15 @@ app.post("/api/post", (req, res) => {
     });
 });
 
-// Get an individual post by id. not sure about this one. 
+// Get an individual post by id 
 app.get("/api/posts/:id", (req, res) => {
-  console.log("hit :id");
+  console.log('=========================================================================');
+  console.log("INDIVIDUAL POST: Get route. REQ.PARAMS.ID : ", req.params.id);
   db.Post.findById(req.params.id)
-    .populate("comments")
+    // ******* does this populate work? **********
+    // .populate("comments")
     .then(results => {
-      console.log("results for individual post: ", results);
+      console.log("Results._id for individual post: ", results._id);
       res.json(results);
     })
     .catch(err => {
@@ -62,10 +66,18 @@ app.get("/api/posts/:id", (req, res) => {
 });
 
 // Get route that retrieves all the comments from Comment collection in the Mongo database
-app.get("/api/comments", (req, res) => {
-  console.log("hit comments API");
-  db.Comment.find({})
-    .then(results => res.json(results))
+app.get("/api/comments/:id", (req, res) => {
+  console.log('=========================================================================');
+  console.log("Get route that retrieves all the comments from Comment collection");
+  console.log("Req.params.id to pull comments belonging to particular post: ", req.params.id);
+  console.log("req.params.id : ", req.params.id);
+  db.Comment.find({ "postId": ObjectId(req.params.id) })
+    // .populate("postId")
+    .then(results => {
+      console.log("COMMENTS belonging to this post: ");
+      console.log(results);
+      res.json(results)
+    })
     .catch(err => {
       console.log(err);
       res.status(422).json(err);
@@ -74,14 +86,23 @@ app.get("/api/comments", (req, res) => {
 
 // Post route that adds a new comment to the Comment collection
 app.post("/api/postComment", (req, res) => {
-  console.log("=================req.body=====================", req.body);
-  console.log("=================req.body.myComment=====================", req.body.myComment);
+  console.log('=========================================================================');
+  // console.log("=================req.body=====================", req.body);
+  console.log("=================req.body.myComment===========", req.body.myComment);
 
   const newComment = {
     text: req.body.myComment,   
+    postId: req.body.uniqueId
   };
+  console.log("Preparing to post the following comment");
+  console.log(newComment);
   db.Comment.create(newComment)
-    .then(results => res.json(results))
+    .then(results => {
+      console.log("NewComment that was just submitted");  
+      console.log('==========results from comment POST route ===========');
+      console.log(results);
+      res.json(results)
+    })
     .catch(err => {
       console.log(err);
       res.status(422).json(err);
