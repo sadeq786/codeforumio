@@ -55,7 +55,7 @@ class SignUpForm extends Component {
         .then(authUser => {
             this.setState(() => ({ ...INITIAL_STATE }));
             console.log("about to redirect to homepage");
-        //   history.push(routes.LANDING);
+          history.push(routes.USERDASHBOARD);
         })
         .catch(error => {
             this.setState(byPropKey('error', error));
