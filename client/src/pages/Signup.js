@@ -37,13 +37,13 @@ class SignUpForm extends Component {
             username,
             email,
             passwordOne,
-          } = this.state;
+        } = this.state;
 
-          const {
+        const {
             history,
-          } = this.props;
+        } = this.props;
 
-          {
+        {
             console.log("clicked submit");
             console.log("this.state: ", this.state);
             console.log("this.props: ", this.props);
@@ -51,17 +51,17 @@ class SignUpForm extends Component {
             // history.push(routes.LANDING);
         }
       
-          auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-            .then(authUser => {
-              this.setState(() => ({ ...INITIAL_STATE }));
-              console.log("about to redirect to homepage");
-            //   history.push(routes.LANDING);
-            })
-            .catch(error => {
-              this.setState(byPropKey('error', error));
-            });
-      
-          event.preventDefault();
+        auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then(authUser => {
+            this.setState(() => ({ ...INITIAL_STATE }));
+            console.log("about to redirect to homepage");
+        //   history.push(routes.LANDING);
+        })
+        .catch(error => {
+            this.setState(byPropKey('error', error));
+        });
+    
+        event.preventDefault();
     }
 
     render() {

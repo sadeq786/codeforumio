@@ -7,8 +7,8 @@ export default {
     },
 
     // Create a post by making a POST request to /api/post route on the express server
-    createNewPost: function () {
-        return axios.post("/api/post", "newPost");
+    createNewPost: function (newPost) {
+        return axios.post("/api/post", newPost);
     },
 
     // Edit/update route
@@ -29,4 +29,6 @@ export default {
     submitComment: function (text) {
         return axios.post("/api/postComment", text);
     },
+
+
 }

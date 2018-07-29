@@ -33,15 +33,23 @@ app.get("/api/posts", (req, res) => {
 // Post route that adds a new post to the Post collection
 // Not used yet. Will be used for adding new post. 
 app.post("/api/post", (req, res) => {
+  console.log('=========================================================================');
+  console.log("=================== SUBMIT NEW POST =====================================");
   const newPost = {
     postTitle: req.body.postTitle,
     description: req.body.description,
-    stars: req.body.stars,
-    category: req.body.category,
-    comments: req.body.comments
+    // stars: req.body.stars,
+    // category: req.body.category,
+    // comments: req.body.comments
   };
+  console.log('newPost to be submitted: ');
+  console.log(newPost);
   db.Post.create(newPost)
-    .then(results => res.json(results))
+    .then(results => {
+      console.log('The following are results from the newPost submission: ');
+      console.log(results);
+      res.json(results)
+    })
     .catch(err => {
       console.log(err);
       res.status(422).json(err);

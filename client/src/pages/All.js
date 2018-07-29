@@ -10,7 +10,7 @@ import * as routes from "../constants/routes"
 class All extends Component {
     state = {
         posts: [],
-       
+
     };
 
     componentDidMount() {
@@ -30,43 +30,47 @@ class All extends Component {
         console.log('this.props: ', this.props);
         //loadIndividualPost reroute
         API.getIndividualPost(id)
-            .then(results => { 
+            .then(results => {
                 console.log("Here are my results: ", results.data._id);
 
                 // this.props.history.push("/IndividualPost");
                 this.props.history.push(routes.INDIVIDUALPOST);
-    });
+            });
         console.log("about to redirect");
         // reroute to individual post page here
-        
-
     }
 
     render() {
         return (
             <div className="container">
-                <div className="col-md-12">
-                    {console.log(this.state.posts)}
-                    {/* load posts */}
-                    <div className="row">
-                        <div className="col-md-1"></div>
-                        <div className="col-md-11">
-                            <h3>Latest Posts</h3>
-                        </div>
-                    </div>
-                    {this.state.posts.map(item => (
-                        <Post
-                            key={item._id}
-                            id={item._id}
-                            postTitle={item.postTitle}
-                            description={item.description}
-                            stars={item.stars}
-                            comments={item.comments}
-                            category={item.category}
-                            handleClick={this.handleClick}
-                        />
-                    ))}
+                <div className="row">
+                    <div className="col-md-9">
+                        {console.log(this.state.posts)}
+                        {/* load posts */}
+                        <div className="row">
+                            <div className="col-md-1"></div>
+                            <div className="col-md-8">
+                                <h3>Latest Posts</h3>
+                            </div>
 
+                        </div>
+                        {this.state.posts.map(item => (
+                            <Post
+                                key={item._id}
+                                id={item._id}
+                                postTitle={item.postTitle}
+                                description={item.description}
+                                stars={item.stars}
+                                comments={item.comments}
+                                category={item.category}
+                                handleClick={this.handleClick}
+                            />
+                        ))}
+
+                    </div>
+                    <div className="col-md-3">
+                        <button type="submit" onClick={ () => this.props.history.push(routes.NEWPOST)}> + Add New Post </button>
+                    </div>
                 </div>
             </div>
         )

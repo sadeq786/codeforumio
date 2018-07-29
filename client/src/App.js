@@ -10,6 +10,7 @@ import Account from "./pages/Account";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordForget from "./pages/PasswordForget";
 import SignOut from "./pages/SignOut";
+import NewPost from "./pages/NewPost";
 
 
 const App = () => (
@@ -25,6 +26,8 @@ const App = () => (
       <Route exact path="/PasswordChange" component={PasswordChange} />
       <Route exact path="/PasswordForget" component={PasswordForget} />
       <Route exact path="/SignOut" component={SignOut} />
+      <Route exact path="/NewPost" component={NewPost} />
+      
 
       
     </div>
