@@ -7,6 +7,7 @@ export const PASSWORD_FORGET = '/pw-forget';
 export const INDIVIDUALPOST = '/IndividualPost';
 export const LOGIN = '/login';
 export const NEWPOST = '/NewPost';
+export const ALL = '/All';
 
 
 

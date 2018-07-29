@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import * as routes from '../constants/routes';
 import API from "../utils/API";
+import { Link, withRouter } from 'react-router-dom';
 
-const NewPostPage = () =>
+const NewPostPage = ({ history }) =>
     <div>
         <h3>Submit a New Post</h3>
-        <NewPostForm />
+        <NewPostForm history={history} />
     </div>
 
 const INITIAL_STATE = {
@@ -30,13 +31,20 @@ class NewPostForm extends Component {
             description
         } = this.state;
 
+        const {
+            history,
+        } = this.props;
+
+        console.log('this.props: ');
+        console.log(this.props);  
+
         API.createNewPost(this.state)
             .then(res => {
                 console.log("submitted post");
                 // window.location.reload();
+                history.push(routes.ALL);
             })
             .catch(err => console.log("hey this is the error: ", err));
-
 
 
         event.preventDefault();
@@ -90,7 +98,9 @@ class NewPostForm extends Component {
     }
 }
 
-export default NewPostPage;
+export default withRouter(NewPostPage);
+
+
 
 export {
     NewPostForm
