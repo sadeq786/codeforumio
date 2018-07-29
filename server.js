@@ -117,6 +117,35 @@ app.post("/api/postComment", (req, res) => {
     });
 });
 
+// Route for updating an Post's associated Comment
+app.put("/comments/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  db.Comment.findOneAndUpdate({ _id: req.params.id }, req.body , { new: true })
+    .then(function(dbPost) {
+      // If we were able to successfully update an Post, send it back to the client
+      res.json(dbPost);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+// Route for deleting an Post's associated Comment
+app.delete("/comments/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  db.Comment.findById({ _id: req.params.id })
+    .then(dbComment => dbComment.remove())
+    .then(function(dbPost) {
+      // If we were able to successfully update an Post, send it back to the client
+      res.json(dbPost);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function (req, res) {
