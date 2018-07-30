@@ -23,19 +23,22 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth.onAuthStateChanged(authUser => {
+      console.log('This is the current authUser: ', authUser);
       authUser
         ? this.setState({ authUser })
         : this.setState({ authUser: null });
     });
   }
-
+  
   render() {
+    /* {console.log("this.state for current page: ", this.state.authUser.email)} */
+    console.log('Test method: ', firebase.auth.currentUser);
+    
     return (
       <Router>
         <div>
-          {console.log("this.state for current page: ", [this.state.authUser])}
           <Navbar authUser={this.state.authUser}/>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/All" render={props => <All {...props} />} />
