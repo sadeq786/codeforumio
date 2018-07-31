@@ -38,6 +38,8 @@ app.post("/api/post", (req, res) => {
   const newPost = {
     postTitle: req.body.postTitle,
     description: req.body.description,
+    loggedInUser: req.body.loggedInUser
+
     // stars: req.body.stars,
     // category: req.body.category,
     // comments: req.body.comments

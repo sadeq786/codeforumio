@@ -24,6 +24,10 @@ const postSchema = new Schema ({
         required: true,
         default: "all"
     },
+    loggedInUser: {
+        type: String,
+        default: "Anon"
+    }
     // comments : [
     //     {
     //       type: Schema.Types.ObjectId,
