@@ -13,6 +13,9 @@ const commentSchema = new Schema ({
         // default: req.params.id
         // required: true
     },
+    loggedInUser: {
+        type: String
+    },
     // stars: {
     //     type: Number,
     //     default: 0,

@@ -95,12 +95,13 @@ app.get("/api/comments/:id", (req, res) => {
 // Post route that adds a new comment to the Comment collection
 app.post("/api/postComment", (req, res) => {
   console.log('=========================================================================');
-  // console.log("=================req.body=====================", req.body);
   console.log("=================req.body.myComment===========", req.body.myComment);
+  console.log("=================req.body.loggedInUser=====================", req.body.loggedInUser);
 
   const newComment = {
     text: req.body.myComment,   
-    postId: req.body.uniqueId
+    postId: req.body.uniqueId,
+    loggedInUser: req.body.loggedInUser
   };
   console.log("Preparing to post the following comment");
   console.log(newComment);

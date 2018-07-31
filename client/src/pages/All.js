@@ -41,6 +41,7 @@ class All extends Component {
     }
 
     render() {
+        console.log('this.props HERE: ', this.props);
         return (
             <div className="container">
                 <div className="row">

@@ -16,10 +16,18 @@ const Comments = props => (
             <div className="col-md-11">
                 {// comments
                 }
-                <p>
+                {/* <p>
                     {props.text}
                 </p>
-                {/* <p className="text-right">USER</p> */}
+                <p className="text-right">{props.loggedInUser}</p> */}
+                <div className="card"> 
+                    <div className="card-header">
+                        Contributor: {props.loggedInUser}
+                    </div>
+                    <div className="card-body">
+                        <p className="card-text">{props.text}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

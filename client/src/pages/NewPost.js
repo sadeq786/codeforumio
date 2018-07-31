@@ -33,6 +33,7 @@ class NewPostForm extends Component {
 
         const {
             history,
+            
         } = this.props;
 
         console.log('this.props: ');
@@ -61,7 +62,8 @@ class NewPostForm extends Component {
             postTitle === '' ||
             description === '';
 
-        console.log(this.state);
+        console.log('this.state HERE: ', this.state);
+        console.log('this.props HERE: ', this.props);
 
         return (
 

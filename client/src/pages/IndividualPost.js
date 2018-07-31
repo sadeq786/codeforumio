@@ -10,8 +10,8 @@ class IndividualPost extends Component {
         post: [],
         myComment: "",
         comments: [],
-        uniqueId: ""
-
+        uniqueId: "",
+        loggedInUser: ""
     };
 
     handleInputChange = event => {
@@ -26,6 +26,7 @@ class IndividualPost extends Component {
             [name]: value
         });
         this.setState({ myComment: event.target.value });
+        this.setState({ loggedInUser: this.props.currentUserEmail});
 
         console.log("state: ", this.state);
     };
@@ -61,7 +62,7 @@ class IndividualPost extends Component {
         const id = localStorage.getItem("postId");
         this.setState({ uniqueId: id });
 
-        // console.log("props: ", props);
+        console.log("props: ", this.props);
         console.log("local storage get item: ", id);
         API.getIndividualPost(id)
             .then(res => {
@@ -79,6 +80,7 @@ class IndividualPost extends Component {
     }
 
     render() {
+        console.log('this.props HERE: ', this.props);
         return (
             <div>
                 {/* {console.log("in individual post now")} */}
@@ -130,6 +132,7 @@ class IndividualPost extends Component {
                             id={item._id}
                             text={item.text}
                             createdAt={item.createdAt}
+                            loggedInUser={item.loggedInUser}
 
                         />
                     ))}
