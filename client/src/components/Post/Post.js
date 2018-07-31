@@ -25,7 +25,8 @@ const Post = props => (
                         <p className="card-text">{props.description}</p>
                     </div>
                 </div>
-                <p className="text-right">USER</p>
+                {console.log('props.loggedInUser: ', props.loggedInUser)}
+                <p className="text-right">Author: {props.loggedInUser}</p>
             </div>
         </div>
     </div>

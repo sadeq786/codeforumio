@@ -56,16 +56,18 @@ class All extends Component {
 
                         </div>
                         {this.state.posts.map(item => (
-                            <Post
-                                key={item._id}
-                                id={item._id}
-                                postTitle={item.postTitle}
-                                description={item.description}
-                                stars={item.stars}
-                                comments={item.comments}
-                                category={item.category}
-                                handleClick={this.handleClick}
-                            />
+                            
+                                <Post
+                                    key={item._id}
+                                    id={item._id}
+                                    postTitle={item.postTitle}
+                                    description={item.description}
+                                    stars={item.stars}
+                                    comments={item.comments}
+                                    category={item.category}
+                                    handleClick={this.handleClick}
+                                    loggedInUser={item.loggedInUser}
+                                />
                         ))}
 
                     </div>

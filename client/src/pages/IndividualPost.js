@@ -93,6 +93,7 @@ class IndividualPost extends Component {
                     stars={this.state.post.stars}
                     comments={this.state.post.comments}
                     category={this.state.post.category}
+                    loggedInUser={this.state.post.loggedInUser}
                 />
                 <div className="container">
                     <div className="row">

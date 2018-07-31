@@ -3,15 +3,17 @@ import * as routes from '../constants/routes';
 import API from "../utils/API";
 import { Link, withRouter } from 'react-router-dom';
 
-const NewPostPage = ({ history }) =>
+const NewPostPage = ({ history, currentUserEmail }) =>
     <div>
+        {console.log('INSIDE NEW POST PAGE')}
         <h3>Submit a New Post</h3>
-        <NewPostForm history={history} />
+        <NewPostForm history={history} currentUserEmail={currentUserEmail} />
     </div>
 
 const INITIAL_STATE = {
     postTitle: '',
-    description: ''
+    description: '',
+    loggedInUser: ''
 };
 
 const byPropKey = (propertyName, value) => () => ({
@@ -21,19 +23,33 @@ const byPropKey = (propertyName, value) => () => ({
 class NewPostForm extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = { ...INITIAL_STATE };
+
     }
+
+    componentWillMount() {       
+        console.log('component has mounted');
+        console.log('these are the props here: ');
+        console.log(this.props);
+        this.setState({ loggedInUser: 'Anonymous User'});
+    };
+
+
 
     onSubmit = (event) => {
         const {
             postTitle,
-            description
+            description,
+            loggedInUser
         } = this.state;
+
+        this.setState({ loggedInUser: this.props.currentUserEmail});
+
 
         const {
             history,
-            
+            currentUserEmail
         } = this.props;
 
         console.log('this.props: ');
@@ -55,19 +71,23 @@ class NewPostForm extends Component {
 
         const {
             postTitle,
-            description
+            description,
+            loggedInUser
         } = this.state;
 
         const isInvalid =
             postTitle === '' ||
             description === '';
 
-        console.log('this.state HERE: ', this.state);
-        console.log('this.props HERE: ', this.props);
+        console.log('this.state HERE(FORM): ', this.state);
+        console.log('this.props HERE(FORM): ', this.props);
+        console.log('this.props.currentUserEmail : ', this.props.currentUserEmail);
+
 
         return (
 
             <form onSubmit={this.onSubmit}>
+            {console.log('INSIDE NEW POST FORM')}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -84,7 +104,13 @@ class NewPostForm extends Component {
                         <div className="col-md-12">
                             <textarea
                                 value={description}
-                                onChange={event => this.setState(byPropKey('description', event.target.value))}
+                                onChange={event => 
+                                    {
+                                        this.setState(byPropKey('description', event.target.value))
+                                        this.setState(byPropKey('loggedInUser', this.props.currentUserEmail))
+                                    }
+                            }
+
                                 type="text"
                                 placeholder="Description"
                             ></textarea>
